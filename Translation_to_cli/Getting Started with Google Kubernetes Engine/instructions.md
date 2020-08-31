@@ -81,7 +81,7 @@ are enabled in our project.
     kubectl get services
     ```
 
-5. Once the **External-IP** field is populated for your service, open a web browser tab & paste the address into the address bar and the the default home page of the Nginx browser is displayed
+5. Once the **External-IP** field is populated for your service, open a web browser tab & paste the address into the address bar and the default home page of the Nginx browser is displayed
 
 6. Scale up the number of pods running in your service
 
