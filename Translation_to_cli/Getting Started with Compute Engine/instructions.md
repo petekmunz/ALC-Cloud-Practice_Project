@@ -6,19 +6,19 @@ Getting through the hands-on qwiklab just using the cli.
 
 1. Display a list of all the zones in the region your project is assigned to, we use the default `us-central1` region
 
-    ```{.python}
+    ```shell
     gcloud compute zones list | grep us-central1
     ```
 
 2. From the displayed zones, you can choose & set a default zone for your compute engine, in this case we use `us-central1-a`
 
-    ```{.python}
+    ```shell
     gcloud config set compute/zone us-central1-a
     ```
 
 3. Create a Virtual Machine instance called `my-vm-1` in that zone
 
-    ```{.python}
+    ```shell
     gcloud compute instances create "my-vm-1" \
     --machine-type "n1-standard-1" \
     --image-project "debian-cloud" \
@@ -29,7 +29,7 @@ Getting through the hands-on qwiklab just using the cli.
 
 4. Create another Virtual Machine called `my-vm-2` in a zone other than the default we earlier specified
 
-    ```{.python}
+    ```shell
     gcloud compute instances create "my-vm-2" \
     --zone "us-central1-b" \
     --machine-type "n1-standard-1" \
@@ -40,7 +40,7 @@ Getting through the hands-on qwiklab just using the cli.
 
 5. Get the external IP address of `my-vm-1`. We will need this later, note it down
 
-    ```{.python}
+    ```shell
     gcloud compute instances describe my-vm-1 \
     --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
     ```
@@ -49,39 +49,39 @@ Getting through the hands-on qwiklab just using the cli.
 
 1. Connect to `my-vm-2` instance via ssh where `PROJECT_ID` is your project-id on the [Google Cloud Console](https://console.cloud.google.com/)
 
-    ```{.python}
+    ```shell
     gcloud compute ssh --project PROJECT_ID --zone "us-central1-b" my-vm-2
     ```
 
 2. Use the ping command to confirm that `my-vm-2` can reach `my-vm-1` over the network
 
-    ```{.python}
+    ```shell
     ping my-vm-1
     ```
 
-3. Satisfied there is a connection use **Ctrl + C** to abort the ping command
+3. Satisfied there is a connection use **Ctrl+C** to abort the ping command
 
 4. Connect via ssh to `my-vm-1`
 
-    ```{.python}
+    ```shell
     gcloud compute ssh --project PROJECT_ID --zone "us-central1-a" my-vm-1
     ```
 
 5. Once connected, install the Nginx web-server
 
-    ```{.python}
+    ```shell
     sudo apt-get install nginx-light -y
     ```
 
 6. Use the nano text editor to add a custom message to the home page of the web server
 
-    ```{.python}
+    ```shell
     sudo nano /var/www/html/index.nginx-debian.html
     ```
 
 7. Use the arrow keys to move the cursor to the line just below the h1 header. Add text like this, and replace YOUR_NAME with your name
 
-    ```{.python}
+    ```shell
     Hi from YOUR_NAME
     ```
 
@@ -89,15 +89,15 @@ Getting through the hands-on qwiklab just using the cli.
 
 9. Confirm the web-server is live by running the following command on the `my-vm-1` instance
 
-    ```{.python}
+    ```shell
     curl http://localhost/
     ```
 
     The response will be the HTML source of the web server's home page, including your line of custom text
 
-10. Exit the `my-vm-1` instance by excuting this command
+10. Exit the `my-vm-1` instance by executing this command
 
-    ```{.python}
+    ```shell
     exit
     ```
 
@@ -105,7 +105,7 @@ Getting through the hands-on qwiklab just using the cli.
 
 11. To confirm that `my-vm-2` can reach the web server on `my-vm-1`, at the command prompt on `my-vm-2`, execute this command
 
-    ```{.python}
+    ```shell
     curl http://my-vm-1/
     ```
 
